@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JameProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Recipes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ingredients" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+    <Property Name="CookingProcess" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Isfree" Type="Boolean" />
+    <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="JameProjectEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Recipes" EntityType="Self.Recipes" />
+    <EntitySet Name="AspNetUsers" EntityType="JameProjectModel.AspNetUsers" />
+    <EntitySet Name="Subscription" EntityType="JameProjectModel.Subscription" />
+    <AssociationSet Name="FK_Subscription_AspNetUsers" Association="JameProjectModel.FK_Subscription_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Subscription" EntitySet="Subscription" />
+    </AssociationSet>
+    <EntitySet Name="Announcement" EntityType="JameProjectModel.Announcement" />
+    <EntitySet Name="FeedBack" EntityType="JameProjectModel.FeedBack" />
+    <AssociationSet Name="FK_FeedBack_AspNetUsers" Association="JameProjectModel.FK_FeedBack_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FeedBack" EntitySet="FeedBack" />
+    </AssociationSet>
+    <EntitySet Name="FAQ" EntityType="JameProjectModel.FAQ" />
+    <EntitySet Name="contestDB" EntityType="JameProjectModel.contestDB" />
+    <AssociationSet Name="FK_contestDB_AspNetUsers" Association="JameProjectModel.FK_contestDB_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="contestDB" EntitySet="contestDB" />
+    </AssociationSet>
+    <EntitySet Name="Winner" EntityType="JameProjectModel.Winner" />
+    <AssociationSet Name="FK_Winner_AspNetUsers" Association="JameProjectModel.FK_Winner_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Winner" EntitySet="Winner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Winner_contestDB" Association="JameProjectModel.FK_Winner_contestDB">
+      <End Role="contestDB" EntitySet="contestDB" />
+      <End Role="Winner" EntitySet="Winner" />
+    </AssociationSet>
+    <EntitySet Name="Tips" EntityType="JameProjectModel.Tips" />
+    <EntitySet Name="Image_User" EntityType="JameProjectModel.Image_User" />
+    <AssociationSet Name="FK_Image_User_AspNetUsers" Association="JameProjectModel.FK_Image_User_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Image_User" EntitySet="Image_User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="U_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="P_Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Subscription" Relationship="JameProjectModel.FK_Subscription_AspNetUsers" FromRole="AspNetUsers" ToRole="Subscription" />
+    <NavigationProperty Name="FeedBack" Relationship="JameProjectModel.FK_FeedBack_AspNetUsers" FromRole="AspNetUsers" ToRole="FeedBack" />
+    <NavigationProperty Name="contestDB" Relationship="JameProjectModel.FK_contestDB_AspNetUsers" FromRole="AspNetUsers" ToRole="contestDB" />
+    <NavigationProperty Name="Winner" Relationship="JameProjectModel.FK_Winner_AspNetUsers" FromRole="AspNetUsers" ToRole="Winner" />
+    <NavigationProperty Name="Image_User" Relationship="JameProjectModel.FK_Image_User_AspNetUsers" FromRole="AspNetUsers" ToRole="Image_User" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubscriptionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Subscription_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Subscription_Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="AspNetUsers" Relationship="JameProjectModel.FK_Subscription_AspNetUsers" FromRole="Subscription" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_Subscription_AspNetUsers">
+    <End Type="JameProjectModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="JameProjectModel.Subscription" Role="Subscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscription">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Announcement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="dateposted" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="FeedBack">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datePosted" Type="DateTime" Precision="3" />
+    <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contents" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="User_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="JameProjectModel.FK_FeedBack_AspNetUsers" FromRole="FeedBack" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_FeedBack_AspNetUsers">
+    <End Type="JameProjectModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="JameProjectModel.FeedBack" Role="FeedBack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FeedBack">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FAQ">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="contestDB">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Ingradient" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CookingProcess" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="userid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="JameProjectModel.FK_contestDB_AspNetUsers" FromRole="contestDB" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Winner" Relationship="JameProjectModel.FK_Winner_contestDB" FromRole="contestDB" ToRole="Winner" />
+  </EntityType>
+  <Association Name="FK_contestDB_AspNetUsers">
+    <End Type="JameProjectModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="JameProjectModel.contestDB" Role="contestDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="contestDB">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Winner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Contestid" Type="Int32" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="JameProjectModel.FK_Winner_AspNetUsers" FromRole="Winner" ToRole="AspNetUsers" />
+    <NavigationProperty Name="contestDB" Relationship="JameProjectModel.FK_Winner_contestDB" FromRole="Winner" ToRole="contestDB" />
+  </EntityType>
+  <Association Name="FK_Winner_AspNetUsers">
+    <End Type="JameProjectModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="JameProjectModel.Winner" Role="Winner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Winner">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Winner_contestDB">
+    <End Type="JameProjectModel.contestDB" Role="contestDB" Multiplicity="0..1" />
+    <End Type="JameProjectModel.Winner" Role="Winner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="contestDB">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Winner">
+        <PropertyRef Name="Contestid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Tips">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DatePosted" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Image_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="JameProjectModel.FK_Image_User_AspNetUsers" FromRole="Image_User" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_Image_User_AspNetUsers">
+    <End Type="JameProjectModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="JameProjectModel.Image_User" Role="Image_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image_User">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

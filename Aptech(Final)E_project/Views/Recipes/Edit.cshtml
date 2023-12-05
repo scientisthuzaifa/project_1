@@ -1,0 +1,134 @@
+﻿@model Aptech_Final_E_project.Context.Recipes
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    /* Custom CSS for the card */
+    .card {
+        background-color: #f8f9fa; /* Light gray background */
+        border: 4px solid #ced4da; /* Increase border width */
+        padding: 20px; /* Add some padding for spacing */
+        max-width: 600px; /* Limit card width */
+        margin: 0 auto; /* Center the card horizontally */
+        text-align: left; /* Left-align card content */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    /* Style the form labels */
+    .control-label {
+        font-weight: bold;
+    }
+
+    /* Style the submit button */
+    .btn-primary {
+        background-color: #3498db; /* Blue background */
+        color: #fff; /* White text color */
+        border: none; /* Remove border */
+    }
+
+    /* Style the Back to List button */
+    .btn-secondary {
+        background-color: #ccc; /* Light gray background */
+        color: #000; /* Black text color */
+        border: none; /* Remove border */
+    }
+</style>
+
+<h2 class="text-center">Edit</h2>
+
+<div class="card">
+    <div class="card-body">
+        <!-- Center-align the form contents -->
+        <h4 class="card-title">Recipe Details</h4>
+        <hr />
+
+        @using (Html.BeginForm("Edit", "Recipes", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ingredients, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Ingredients, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CookingProcess, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.CookingProcess, new { @class = "form-control", rows = 6 })
+                @Html.ValidationMessageFor(model => model.CookingProcess, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Add other form fields here -->
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Isfree, htmlAttributes: new { @class = "control-label" })
+                <div class="radio">
+                    @Html.RadioButtonFor(model => model.Isfree, true) Yes
+                    @Html.RadioButtonFor(model => model.Isfree, false) No
+                </div>
+                @Html.ValidationMessageFor(model => model.Isfree, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label" })
+
+                <!-- Display the existing image if it exists -->
+                @if (!string.IsNullOrEmpty(Model.Images))
+                {
+                    <img id="existingImage" src="@Url.Content(Model.Images)" alt="Existing Image" width="100" height="100" />
+                }
+                else
+                {
+                    <img id="existingImage" src="#" alt="No Image" style="display: none;" width="100" height="100" />
+                }
+
+                <!-- Input field for uploading a new image -->
+                <input type="file" id="imageUpload" class="form-control" />
+
+                <!-- Hidden field to store the new image path -->
+                @Html.HiddenFor(model => model.Images, new { id = "newImagePath" })
+
+                <!-- JavaScript to handle image selection -->
+                <script>
+                    document.getElementById('imageUpload').addEventListener('change', function () {
+                        var fileInput = this;
+                        var existingImage = document.getElementById('existingImage');
+                        var newImagePath = document.getElementById('newImagePath');
+
+                        if (fileInput.files.length > 0) {
+                            // User has selected a new image
+                            var selectedImage = fileInput.files[0];
+                            var objectURL = URL.createObjectURL(selectedImage);
+
+                            // Display the new image
+                            existingImage.src = objectURL;
+                            existingImage.style.display = 'block';
+
+                            // Store the new image path
+                            newImagePath.value = objectURL;
+                        } else {
+                            // No new image selected
+                            existingImage.style.display = 'none';
+                            newImagePath.value = ''; // Clear the new image path
+                        }
+                    });
+                </script>
+            </div>
+
+
+            <div class="form-group text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>

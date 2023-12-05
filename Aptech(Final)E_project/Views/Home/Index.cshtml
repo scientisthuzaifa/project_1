@@ -1,0 +1,389 @@
+﻿@model ModelClass
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Custom alert styles */
+        .custom-alert {
+            padding: 10px; /* Reduce padding to make it smaller */
+            margin-bottom: 10px; /* Reduce margin to make it smaller */
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        /* Custom styles for the "info" alert */
+        .custom-alert-info {
+            background-color: #d1ecf1; /* Light blue background color */
+            border-color: #bee5eb; /* Light blue border color */
+            color: #0c5460; /* Dark blue text color */
+            font-size: 14px; /* Adjust font size to make it smaller */
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+    <!-- offer section -->
+
+    <section class="offer_section layout_padding-bottom " id="subscription">
+        <div class="offer_container">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-6  ">
+                        <div class="box ">
+                            <div class="img-box">
+                                <img src="images/o1.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    Paid Recipes
+                                </h5>
+                                <h6>
+                                    <span>$50</span> Monthly
+                                </h6>
+                                @if (TempData["Subscription"] != null)
+                                {
+                                    <div class="custom-alert custom-alert-info">
+                                        @TempData["Subscription"]
+                                    </div>
+                                }
+
+
+
+                                @using (Html.BeginForm("Subscription", "Home", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <!-- Include the form elements from the first form here -->
+                                    <!-- For example, input fields, labels, etc. -->
+                                    <input type="hidden" name="SubscriptionType" value="monthly" />
+                                    <button class="btn btn-warning" type="submit" name="subscribeButton">
+                                        Subscribe Now
+                                    </button>
+                                }
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box ">
+                            <div class="img-box">
+                                <img src="images/o2.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    Paid Recipes
+                                </h5>
+                                <h6>
+                                    <span>$450</span> Annualy
+                                </h6>
+                                @if (TempData["Subscription"] != null)
+                                {
+                                    <div class="custom-alert custom-alert-info">
+                                        @TempData["Subscription"]
+                                    </div>
+                                }
+                                @using (Html.BeginForm("Subscription", "Home", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <!-- Include the form elements from the first form here -->
+                                    <!-- For example, input fields, labels, etc. -->
+                                    <input type="hidden" name="SubscriptionType" value="Yearly" />
+                                    <button class="btn btn-warning" type="submit" name="subscribeButton">
+                                        Subscribe Now
+
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end offer section -->
+    <!-- food section -->
+
+   <section class="food_section layout_padding-bottom">
+       <div class="container">
+           <div class="heading_container heading_center">
+               <h2>
+                   Our Recipes
+               </h2>
+           </div>
+
+           <ul class="filters_menu">
+               <li class="active" data-filter="*">All Recipes</li>
+               <li data-filter=".free">Free Recipe</li>
+               <li data-filter=".paid">Paid Recipe</li>
+           </ul>
+          
+           <!-- Move the filters-content and row grid outside the foreach loop -->
+           <div class="filters-content">
+               <div class="row grid">
+                   @foreach (var recipe in Model.Receipes)
+                   {
+                       <div class="col-sm-6 col-lg-4 all @(recipe.Isfree ==true? "free" : "paid")">
+                           <div class="box">
+                               <div>
+                                   <div class="img-box">
+                                       <img src="@Url.Content(recipe.Images)" alt="">
+                                   </div>
+                                   <div class="detail-box">
+                                       <h5>@recipe.Title</h5>
+                                       <p>James is our professional chef and you need a recipe, click here.</p>
+
+
+                                       @if (recipe.Isfree == true)
+                                       {
+                                           <!-- Free recipe details -->
+                                           <a href="@Url.Action("Details", "Home", new { id = recipe.Id })" class="text-white btn btn-outline-warning" style="border-radius: 50px;"><h6>View Recipe</h6></a>
+                                       }
+                                       else if (Model.UserHasActivesubscription)
+                                       {
+                                           <!-- Paid recipe details for users with active subscriptions -->
+                                           <a href="@Url.Action("Details", "Home", new { id = recipe.Id })" class="text-white btn btn-outline-warning" style="border-radius: 50px;"><h6>View Recipe</h6></a>
+                                       }
+                                       else
+                                       {
+                                           <!-- Prompt to subscribe for paid recipes -->
+                                           <a href="#subscription" class="text-white btn btn-outline-warning" style="border-radius: 50px;"><h6>Subscribe to View</h6></a>
+                                       }
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   }
+               </div>
+           </div>
+
+
+
+       </div>
+</section>
+    <!-- end food section -->
+    <!-- about section -->
+
+    <section class="about_section layout_padding">
+        <div class="container  ">
+
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="img-box">
+                        <img src="images/announcement.jpg" alt="" style="border-radius: 50px;">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-box">
+                        <div class="heading_container">
+                            <h2>
+                                Announcement
+                            </h2>
+                        </div>
+                        <p>
+
+                            @foreach (var item in Model.Announcements)
+                            {
+                                @item.title<br /><br />
+                                @item.description
+
+                            }
+
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end about section -->
+    <!-- book section -->
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Feedback
+                </h2>
+            </div>
+
+            @using (Html.BeginForm("FeedBacks", "FeedBack", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form_container">
+                            <div>
+                                <input type="text" class="form-control" placeholder="Contents" required name="Contents" />
+                            </div>
+
+                            <div>
+                                <select class="form-control nice-select wide" required name="Rating">
+                                    <option value="" disabled selected>
+                                        Rating
+                                    </option>
+                                    <option value="">
+                                        No Rating
+                                    </option>
+                                    <option value="2">
+                                        2
+                                    </option>
+                                    <option value="5">
+                                        5
+                                    </option>
+                                    <option value="8">
+                                        8
+                                    </option>
+                                    <option value="10">
+                                        10
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="btn_box">
+                                <button class="btn btn-warning" type="submit" name="subscribeButton">
+                                    FeedBack
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="heading_container heading_center psudo_white_primary mb_43" style="margin-right: 320px;">
+            <h2>FAQS</h2>
+        </div>
+
+        <br />
+        <style>
+            .faq-container {
+                max-width: 600px;
+                width: 100%;
+                margin-left: 100px;
+            }
+
+            .faq-card {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                padding: 20px;
+                cursor: pointer;
+                margin-left: 1px;
+            }
+
+            .question {
+                font-weight: bold;
+                display: flex;
+                margin-left: 20px;
+                align-items: center;
+            }
+           
+
+            .toggle-sign {
+                font-size: 40px;
+                font-weight: bold;
+            }
+
+            /* Increase the button size and add animation */
+            .btn.btn-block {
+                font-size: 27px;
+               
+                transition: transform 0.7s ease; /* Add a smooth transition */
+            }
+
+                /* Apply scale-up animation when clicked */
+                .btn.btn-block.active {
+                    transform: scale(1.2); /* Scale up to 1.2 times when active (clicked) */
+                }
+        </style>
+
+        <div class="faq-container">
+            @foreach (var item in Model.FAQs)
+            {
+                <div class="faq-card">
+                    <div class="question">
+                        <span class="toggle-sign">
+                            <!-- Add the "btn-block" class to apply styles -->
+                            <button type="button" class="btn btn-block" data-bs-toggle="collapse" data-bs-target="#demo@(item.Id)">
+                                +
+                            </button>
+                        </span>
+                        @item.Question
+                    </div>
+                    <div id="demo@(item.Id)" class="collapse">
+                        @item.Answer
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+
+
+
+
+
+        <div class="col-md-6">
+            <!--<div class="map_container ">
+          <div id="googleMap"></div>
+        </div>-->
+        </div>
+
+
+    </section>
+    <!-- end book section -->
+    <!-- client section -->
+  
+
+
+    <section class="client_section layout_padding-bottom">
+        <div class="container">
+            <div class="heading_container heading_center psudo_white_primary mb_45">
+                <h2>
+                    What Says Our Customers
+                </h2>
+            </div>
+            <div class="carousel-wrap row ">
+                <div class="owl-carousel client_owl-carousel">
+                    @foreach (var item in Model.tips)
+                    {
+                        <div class="item">
+                            <div class="box">
+                                <div class="detail-box">
+                                    <p>
+                                        @item.Description
+                                    </p>
+                                    <h6>
+                                       James
+                                    </h6>
+                                    <p>
+                                        @item.DatePosted
+                                    </p>
+                                </div>
+                                <div class="img-box">
+                                    <img src="images/client1.jpg" alt="" class="box-img">
+                                </div>
+                            </div>
+                        </div>}
+
+                    </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- end client section -->
+
+
+</body>
+
+</html>

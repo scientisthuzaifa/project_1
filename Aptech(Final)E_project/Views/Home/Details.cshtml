@@ -1,0 +1,91 @@
+﻿@model Aptech_Final_E_project.Context.Recipes
+
+@{
+    Layout = null;
+}
+
+<style>
+    /* Container */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Card */
+    .card {
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    /* Card Header */
+    .card-header {
+        background-color: silver; /* Change to silver color */
+        color: #fff; /* Keep text color white */
+        text-align: center;
+        padding: 10px 0;
+        font-size: 24px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    /* Recipe Details */
+    .recipe-details {
+        margin-top: 20px;
+    }
+
+    /* Style the labels */
+    .control-label {
+        font-weight: bold;
+    }
+
+    /* Back Button */
+    .back-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Style the "Back" button */
+    .btn-back {
+        background-color: #ccc;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Hover effect for the "Back" button */
+        .btn-back:hover {
+            background-color: #999;
+        }
+</style>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Recipe Details
+        </div>
+        <div class="card-body">
+            <div class="recipe-details">
+                <dl>
+                    <dt class="control-label">Title:</dt>
+                    <dd>@Html.DisplayFor(model => model.Title)</dd>
+
+                    <dt class="control-label">Ingredients:</dt>
+                    <dd>@Html.DisplayFor(model => model.Ingredients)</dd>
+
+                    <dt class="control-label">Cooking Process:</dt>
+                    <dd>@Html.DisplayFor(model => model.CookingProcess)</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="back-button">
+            <a href="@Url.Action("Index","Home")" class="btn-back">Back</a>
+        </div>
+    </div>
+</div>

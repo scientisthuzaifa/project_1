@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74b564f1df2542adbfbd28e5c647ff0c" Name="Diagram1">
+        <EntityTypeShape EntityType="JameProjectModel.Recipes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JameProjectModel.AspNetUsers" Width="1.5" PointX="3.25" PointY="0.5" />
+        <EntityTypeShape EntityType="JameProjectModel.Subscription" Width="1.5" PointX="5.5" PointY="1.375" />
+        <AssociationConnector Association="JameProjectModel.FK_Subscription_AspNetUsers" />
+        <EntityTypeShape EntityType="JameProjectModel.Announcement" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="JameProjectModel.FeedBack" Width="1.5" PointX="5.5" PointY="4.5" />
+        <AssociationConnector Association="JameProjectModel.FK_FeedBack_AspNetUsers" />
+        <EntityTypeShape EntityType="JameProjectModel.FAQ" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="JameProjectModel.contestDB" Width="1.5" PointX="5.5" PointY="7.5" />
+        <AssociationConnector Association="JameProjectModel.FK_contestDB_AspNetUsers" />
+        <EntityTypeShape EntityType="JameProjectModel.Winner" Width="1.5" PointX="7.75" PointY="4.25" />
+        <AssociationConnector Association="JameProjectModel.FK_Winner_AspNetUsers" />
+        <AssociationConnector Association="JameProjectModel.FK_Winner_contestDB" />
+        <EntityTypeShape EntityType="JameProjectModel.Tips" Width="1.5" PointX="8.375" PointY="1.75" />
+        <EntityTypeShape EntityType="JameProjectModel.Image_User" Width="1.5" PointX="5.5" PointY="11" />
+        <AssociationConnector Association="JameProjectModel.FK_Image_User_AspNetUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

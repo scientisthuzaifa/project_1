@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Aptech_Final_E_project.Context.Winner>
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
+
+    <style>
+        .main-container {
+            margin: 20px;
+        }
+
+        .card-box {
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        table.data-table {
+            width: 100%;
+        }
+
+        .dataTables_wrapper {
+            overflow-x: auto;
+        }
+
+        .table th,
+        .table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .table-plus {
+            text-align: center;
+        }
+
+        .table img {
+            max-width: 70px;
+            max-height: 70px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: #fff;
+        }
+
+            .btn-secondary:hover {
+                background-color: #545b62;
+                border-color: #545b62;
+            }
+
+        div.dataTables_wrapper div.dataTables_length select {
+            width: 60px;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .no-form-msg {
+            font-size: 24px;
+            color: #d9534f;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        @if (Session["IsFormActivated"] != null && (bool)Session["IsFormActivated"])
+        {
+
+            <table id="myT" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AspNetUsers.U_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.contestDB.Title)
+                        </th>
+                        <th>Result</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AspNetUsers.U_Name)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.contestDB.Title)
+                            </td>
+                            <td>
+                                <button class="btn btn-warning">Winners</button>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="no-form-msg">No Result available at the moment.</p>
+        }
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+    <script>$(document).ready(function () {
+            $('#myT').DataTable();
+        })</script>
+
+</body>
+
+</html>

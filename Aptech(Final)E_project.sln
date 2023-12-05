@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aptech(Final)E_project", "Aptech(Final)E_project\Aptech(Final)E_project.csproj", "{19819906-B5FD-49F5-8EC2-C92A3A951F55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19819906-B5FD-49F5-8EC2-C92A3A951F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19819906-B5FD-49F5-8EC2-C92A3A951F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19819906-B5FD-49F5-8EC2-C92A3A951F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19819906-B5FD-49F5-8EC2-C92A3A951F55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BC901FF-C3E0-42C7-B52C-37552F6AECAF}
+	EndGlobalSection
+EndGlobal

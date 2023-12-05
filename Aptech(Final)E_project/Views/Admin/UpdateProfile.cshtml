@@ -1,0 +1,132 @@
+﻿@model Aptech_Final_E_project.Models.ApplicationUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="" />
+
+    <title>Edit Profile</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+
+    <!-- Owl Carousel stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+          integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+          crossorigin="anonymous" />
+
+    <!-- Font Awesome CSS -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!-- Responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="hero_area">
+        <div class="bg-box" style="background-color: black;">
+        </div>
+        <!-- Header section starts -->
+        <header class="header_section">
+            <div class="container">
+                <!-- Your navigation menu can go here if needed -->
+            </div>
+        </header>
+
+        <!-- End header section -->
+        <!-- Edit profile form section -->
+        <section class="book_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/images/registerimg.jpg" alt="" width="100%" height="100%">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="heading_container">
+                            <h2 class="text-white">Edit Profile</h2>
+                        </div>
+                        <div class="form_container">
+                            @using (Html.BeginForm("UpdateProfile", "Admin", FormMethod.Post, new { role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-white" })
+                                <div class="form-group">
+
+                                    @Html.LabelFor(m => m.UserName, new { @class = "text-white" })
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Your User Name", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-white" })
+                                </div>
+                                <div class="form-group">
+
+                                    @Html.LabelFor(m => m.U_Name, new { @class = "text-white" })
+                                    @Html.TextBoxFor(m => m.U_Name, new { @class = "form-control", placeholder = "Your User Name", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.U_Name, "", new { @class = "text-white" })
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, new { @class = "text-white" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Your Email", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-white" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.P_Number, new { @class = "text-white" })
+                                    @Html.TextBoxFor(m => m.P_Number, new { @class = "form-control", placeholder = "Your Phone", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.P_Number, "", new { @class = "text-white" })
+                                </div>
+                                <div class="btn_box">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End edit profile form section -->
+        <!-- Footer section can go here if needed -->
+
+    </div>
+
+
+    <!-- jQuery -->
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap.js -->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <!-- Owl Carousel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- Isotope.js -->
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <!-- Nice Select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <!-- Custom.js -->
+    <script src="~/Scripts/custom.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+    <!-- End Google Maps API -->
+</body>
+</html>
